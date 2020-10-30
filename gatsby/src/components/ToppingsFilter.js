@@ -74,6 +74,10 @@ export default function ToppingsFilter() {
   // loop over the list of toppings and display the topping and the count of pizzas in that topping
   return (
     <ToppingsStyles>
+      <Link to="/pizzas">
+        <span className="name">All</span>
+        <snap className="count">{pizzas.nodes.length}</snap>
+      </Link>
       {toppingsWithCounts.map((topping) => (
         <Link to={`/topping/${topping.name}`} key={topping.id}>
           <span className="name">{topping.name}</span>
