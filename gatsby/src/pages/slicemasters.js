@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import Pagination from '../components/Pagination';
 
 const SlicemasterGrid = styled.div`
   display: grid;
@@ -36,22 +37,31 @@ const SlicemasterStyles = styled.div`
   }
 `;
 
-export default function SlicemastersPage({ data }) {
+export default function SlicemastersPage({ data, pageContext }) {
   const slicemasters = data.slicemasters.nodes;
   return (
-    <SlicemasterGrid>
-      {slicemasters.map((slicemaster) => (
-        <SlicemasterStyles key={slicemaster.id}>
-          <Link to={`/slicemaster/${slicemaster.slug.current}`}>
-            <h2>
-              <span className="mark">{slicemaster.name}</span>
-            </h2>
-          </Link>
-          <Img fluid={slicemaster.image.asset.fluid} alt={slicemaster.name} />
-          <p className="description">{slicemaster.description}</p>
-        </SlicemasterStyles>
-      ))}
-    </SlicemasterGrid>
+    <>
+      <Pagination
+        totalCount={data.slicemasters.totalCount}
+        pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
+        currentPage={pageContext.currentPage || 1}
+        skip={pageContext.skip}
+        base="/slicemasters"
+      />
+      <SlicemasterGrid>
+        {slicemasters.map((slicemaster) => (
+          <SlicemasterStyles key={slicemaster.id}>
+            <Link to={`/slicemaster/${slicemaster.slug.current}`}>
+              <h2>
+                <span className="mark">{slicemaster.name}</span>
+              </h2>
+            </Link>
+            <Img fluid={slicemaster.image.asset.fluid} alt={slicemaster.name} />
+            <p className="description">{slicemaster.description}</p>
+          </SlicemasterStyles>
+        ))}
+      </SlicemasterGrid>
+    </>
   );
 }
 
