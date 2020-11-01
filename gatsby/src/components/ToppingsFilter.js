@@ -76,7 +76,7 @@ export default function ToppingsFilter() {
     <ToppingsStyles>
       <Link to="/pizzas">
         <span className="name">All</span>
-        <snap className="count">{pizzas.nodes.length}</snap>
+        <span className="count">{pizzas.nodes.length}</span>
       </Link>
       {toppingsWithCounts.map((topping) => (
         <Link to={`/topping/${topping.name}`} key={topping.id}>
