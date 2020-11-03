@@ -18,7 +18,7 @@ export default function OrderPage({ data }) {
     email: '',
   });
 
-  const { order, addToOrder, removefromOrder } = usePizza({
+  const { order, addToOrder, removeFromOrder } = usePizza({
     pizzas,
     inputs: values,
   });
@@ -78,7 +78,7 @@ export default function OrderPage({ data }) {
           <legend>Order</legend>
           <PizzaOrder
             order={order}
-            removeFromOrder={removefromOrder}
+            removeFromOrder={removeFromOrder}
             pizzas={pizzas}
           />
         </fieldset>

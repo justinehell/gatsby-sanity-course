@@ -12,7 +12,7 @@ export default function PizzaOrder({ order, pizzas, removeFromOrder }) {
         return (
           <MenuItemStyles key={singleOrder.id}>
             <Img fluid={pizza.image.asset.fluid} />
-            <h2>{singleOrder.id}</h2>
+            <h2>{pizza.name}</h2>
             <p>
               {formatMoney(calculatePizzaPrice(pizza.price, singleOrder.size))}
               <button
