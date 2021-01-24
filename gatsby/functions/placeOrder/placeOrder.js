@@ -32,7 +32,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function wait(ms = 0) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 exports.handler = async (event, context) => {
+  await wait(2000);
   // console.log(event.body); prints the event.body as a string -> We need to parse it to have it as an object
   const body = JSON.parse(event.body);
   // Validate the data coming in is correct
@@ -49,6 +56,16 @@ exports.handler = async (event, context) => {
         }),
       };
     }
+  }
+
+  // make sure they actually have items in that order
+  if (!body.order.length) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: `Why would you order nothing?!`,
+      }),
+    };
   }
 
   // send the email
