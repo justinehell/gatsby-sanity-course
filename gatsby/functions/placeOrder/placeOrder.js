@@ -42,6 +42,14 @@ exports.handler = async (event, context) => {
   await wait(2000);
   // console.log(event.body); prints the event.body as a string -> We need to parse it to have it as an object
   const body = JSON.parse(event.body);
+  // Check if they have filled out the honeypot (= security to avoid robot from submitting data)
+  if (body.mapleSyrup) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Boop beep bop zzzzzt good bye' }),
+    };
+  }
+
   // Validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
   // We need to loop over the array but using a forEach will create another function scope
