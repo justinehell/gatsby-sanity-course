@@ -8,23 +8,25 @@ export default function useLatestData() {
   // Use a side effect to fetch the data from the graphql endpoint
   useEffect(() => {
     // when the component loads, fetch the data
+    const gql = String.raw;
     fetch(process.env.GATSBY_GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: `
-        query {
-          StoreSettings(id: "downtown") {
-            name
-            slicemaster {
+        query: gql`
+          query {
+            StoreSettings(id: "downtown") {
               name
+              slicemaster {
+                name
+              }
+              hotSlices {
+                name
+              }
             }
-            hotSlices {name}
           }
-        }
-        
         `,
       }),
     })
