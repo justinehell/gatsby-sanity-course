@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const OrderStyles = styled.div`
+const OrderStyles = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
