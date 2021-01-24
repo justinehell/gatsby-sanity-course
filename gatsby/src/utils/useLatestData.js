@@ -1,5 +1,20 @@
 import { useEffect, useState } from 'react';
 
+const deets = `
+    name
+    # _id cause we are querying Sanity directly
+    _id
+    image {
+      asset {
+        url
+        metadata {
+          # low quality image placeholder
+          lqip
+        }
+      }
+    }
+`;
+
 export default function useLatestData() {
   // hot slices
   const [hotSlices, setHotSlices] = useState();
@@ -20,10 +35,10 @@ export default function useLatestData() {
             StoreSettings(id: "downtown") {
               name
               slicemaster {
-                name
+                ${deets}
               }
               hotSlices {
-                name
+                ${deets}
               }
             }
           }
@@ -36,6 +51,9 @@ export default function useLatestData() {
         // set the data to state
         setHotSlices(res.data.StoreSettings.hotSlices);
         setSlicemasters(res.data.StoreSettings.slicemaster);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
   return {
