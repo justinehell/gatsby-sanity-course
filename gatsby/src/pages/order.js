@@ -34,7 +34,7 @@ export default function OrderPage({ data }) {
 
   if (message) return <p>{message}</p>;
   return (
-    <p>
+    <div>
       <SEO title="Order a Pizza !" />
       <OrderStyles onSubmit={submitOrder}>
         <fieldset disabled={loading}>
@@ -111,7 +111,7 @@ export default function OrderPage({ data }) {
           </button>
         </fieldset>
       </OrderStyles>
-    </p>
+    </div>
   );
 }
 
