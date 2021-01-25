@@ -1,5 +1,6 @@
-import path from 'path';
-import fetch from 'isomorphic-fetch';
+const fetch = require('isomorphic-fetch');
+
+const path = require('path');
 
 async function turnPizzasIntoPages({ graphql, actions }) {
   // 1. get a template for this page
@@ -133,12 +134,12 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
   });
 }
 
-export async function sourceNodes(params) {
+const sourceNodes = async function (params) {
   // fetch a list of beers and source them into our gatsby API !
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
-}
+};
 
-export async function createPages(params) {
+const createPages = async function (params) {
   // create pages dynamically
   // wait for all promises to be resolved before finishing this function
   // 1. Pizzas
@@ -149,4 +150,9 @@ export async function createPages(params) {
     turnToppingsIntoPages(params),
     turnSlicemastersIntoPages(params),
   ]);
-}
+};
+
+module.exports = {
+  createPages,
+  sourceNodes,
+};
