@@ -16,10 +16,8 @@ const PizzaStyles = styled.div`
   @supports not (grid-template-rows: subgrid) {
     --rows: auto auto 1fr;
   }
-  grid-template-rows: var(
-    --rows,
-    subgrid
-  ); // check if rows exists, otherwise apply subgrid
+  grid-template-rows: var(--rows, subgrid);
+  // check if rows exists, otherwise apply subgrid
   grid-row: span 3;
   grid-gap: 1rem;
   h2,
